@@ -1,0 +1,48 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+{% load static %}
+    <!-- content-area 시작 -->
+    <div class="content-area">
+        <!-- cafe-list 시작 -->
+        <div class="cafe-list">
+            <div class="grid">
+              {% for cafe in cafes %}
+                <!-- 카페 1개 시작 -->
+                <section class="cafe-item">
+                    <figure class="cafe-item-photo">
+                        {% if cafe.mainphoto %}
+                        <img src="{{ cafe.mainphoto.url }}" alt="">
+                        {% endif %}
+                    </figure>
+                    <div class="cafe-item-info">
+                        <a href="/cafelist/{{cafe.pk}}" style="text-decoration:none"><h2>{{cafe.name}}</h2></a>
+                        <p>개발자와 디자이너들을 위한 카페에요.</p>
+                        <ul class="cafe-item-contact">
+                            <li>
+                                <cafe class="fas fa-map-marker-alt"></cafe>
+                                {{cafe.location}}
+                            </li>
+                            <li>
+                                <cafe class="fas fa-phone"></cafe>
+                                {{cafe.phone}}
+                            </li>
+                            <li>
+                                <cafe class="fab fa-instagram"></cafe>
+                                {{cafe.insta}}
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- cafe-list 끝 -->
+    </div>
+    <!-- content-area 끝 -->
+
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock js %}

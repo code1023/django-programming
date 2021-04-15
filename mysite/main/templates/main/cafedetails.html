@@ -1,0 +1,113 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block content %}
+    <!-- content-area 시작 -->
+    <div class="content-area">
+        <!-- 소개 페이지 내용 시작 -->
+        <div class="grid">
+        <header>
+                <h1>{{cafe.name}}</h1>
+        <br>
+        {% if cafe.mainphoto %}
+        <div class="slideshow-container">
+        <div class="mySlides fade">
+          {% if cafe.subphoto %}
+          <div class="numbertext">1 / 2</div>
+          {% endif %}
+          <img src="{{ cafe.mainphoto.url }}" style="height:50%">
+        </div>
+
+        {% if cafe.subphoto %}
+        <div class="mySlides fade">
+          <div class="numbertext">2 / 2</div>
+          <img src="{{ cafe.subphoto.url }}" style="height:100%">
+        </div>
+            
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <br>
+        <div style="text-align:center">
+          <span class="dot" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+        </div>
+        {% endif %}
+        </div>
+        {% endif %}
+
+        </header>
+        <section class="content-section">
+          <h2>개발자와 디자이너들을 위한 카페에요.</h2>
+          <br>
+          <div class="cafe-item-info">
+          <ul class="cafe-item-contact">
+            <li>
+                <i class="fas fa-map-marker-alt"></i>
+                {{cafe.location}}
+            </li>
+            <li>
+                <i class="fas fa-phone"></i>
+                {{cafe.phone}}
+            </li>
+            <li>
+                <i class="fab fa-instagram"></i>
+                {{cafe.insta}}
+            </li>
+            <li>
+              <p>{{cafe.content|linebreaks}}</p>
+            </li>
+          </ul>
+        </div>
+      </section>
+        <!-- 소개 페이지 내용 끝 -->
+    </div>
+    <!-- content-area 끝 -->
+    </div>
+
+    <div id="map"></div>
+    
+    
+    <script>
+      function initMap() {
+        var jeju = {lat: 33.3616658, lng: 126.5204118};
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 10,
+          center: jeju
+        });
+
+        var marker = new google.maps.Marker({
+          position: {lat: {{cafe.lat}}, lng: {{cafe.lng}}},
+          map: map
+        });
+      }
+    </script>
+<!-- 댓글 시작 -->
+<div id="disqus_thread"></div>
+<script>
+
+/**
+*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+/*
+var disqus_config = function () {
+this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+};
+*/
+(function() { // DON'T EDIT BELOW THIS LINE
+var d = document, s = d.createElement('script');
+s.src = 'https://jejucodincampsample.disqus.com/embed.js';
+s.setAttribute('data-timestamp', +new Date());
+(d.head || d.body).appendChild(s);
+})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                            
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'js/index.js' %}"></script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4oNlGlJ5SIOsW9Pj6l-1opJvQfkJG9l0&callback=initMap">
+    </script>
+{% endblock js %}

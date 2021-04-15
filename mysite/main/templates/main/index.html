@@ -1,0 +1,37 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+{% load static %}
+    <!-- content-area 시작 -->
+    <div class="content-area">
+        <!-- jejumap-container 시작 -->
+        <section class="jejumap-container">
+            <div class="grid">
+                <form action='/cafelist/'>
+                <header class="jejumap-header">
+                    <h1 class="main-copy">지도에서 원하는 지역을 선택하세요!</h1>
+                    <p>선택하지 않으면 전체 지역에서 찾습니다</p>
+                </header>
+                <div class="jejumap">
+                    <div class="jejumap-items">
+                        {% for location in locations %}
+                        <div class="jejumap-item" id="jejumap-item-hangyeong">
+                            <input type="checkbox" class="jejumap-check te-elem" id="check-area-{{ forloop.counter }}" data-city="notJcity" name='locations' value='{{ location.0 }}'>
+                            <div class="mapshape"></div>
+                            <label class="jejumap-item-title te-elem" for="check-area-{{ forloop.counter }}">{{ location.1 }}</label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <button type="submit" class="btn big-btn search-map-btn">카페찾기!</button>
+                </form>
+            </div>
+        </section>
+        <!-- jejumap-container 끝 -->
+    </div>
+    <!-- content-area 끝 -->
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock js %}

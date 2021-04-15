@@ -1,0 +1,29 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block content %}
+    <!-- content-area 시작 -->
+    <div class="content-area">
+        <!-- 소개 페이지 내용 시작 -->
+        <article class="page-content">
+            <div class="grid">
+                <header>
+                    <h1>제주도 카페, 여기 다 있어요!</h1>
+                </header>
+                <section class="content-section">
+                    <header>
+                        <h2>섹션 제목</h2>
+                    </header>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorem cupiditate molestias vel veritatis odio repellat quod velit, at delectus dolor tenetur, laudantium atque, inventore. Quia obcaecati accusantium consequuntur dignissimos fugit.</p>
+                    <p>제주코딩베이스캠프에서 제작하는 예제 웹사이트입니다.</p>
+                </section>
+            </div>
+        </article>
+        <!-- 소개 페이지 내용 끝 -->
+    </div>
+    <!-- content-area 끝 -->
+{% endblock content %}
+
+{% block js %}
+<script src="{% static 'js/index.js' %}"></script>
+{% endblock js %}
