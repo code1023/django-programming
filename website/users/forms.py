@@ -5,7 +5,7 @@ from .models import User
 
 
 class LoginForm(forms.Form):
-    username = forms.CharField(
+    name = forms.CharField(
         error_messages={
             'required': '아이디를 입력해주세요.'
         },
@@ -25,7 +25,7 @@ class LoginForm(forms.Form):
             try:
                 user = User.objects.get(name=name)
             except User.DoesNotExist:
-                self.add_error('username', '아이디가 없습니다')
+                self.add_error('name', '아이디가 없습니다')
                 return
 
             if not check_password(password, user.password):
